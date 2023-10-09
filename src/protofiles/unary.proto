@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package unary;
+
+service Unary{
+ rpc GetServerResponse(Message) returns (MessageResponse) {}
+ rpc GetWordFrequencies(Words) returns (Frequencies) {}
+ rpc Scan(ScanReq) returns (ScanRes) {}
+
+}
+
+message Message{
+ string message = 1;
+}
+
+message Words {
+    repeated string words=1;
+}
+message ScanReq {
+    string book=1;
+    string start=2;
+    string end=3;
+}
+message Frequencies {
+    repeated float frequencies=1;
+}
+
+message ScanRes {
+    message Wordpair {
+        string word=1;
+        string meaning=2;
+    }
+    repeated Wordpair pairs=1;
+}
+message MessageResponse{
+ string message = 1;
+ bool received = 2;
+}
